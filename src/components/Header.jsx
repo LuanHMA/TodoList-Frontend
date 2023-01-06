@@ -15,7 +15,6 @@ export const Header = () => {
 
   const sentRequest = () => {
     if (validateField(taskDescription)) {
-    } else {
       createData(taskDescription);
       setTaskDescription("");
       inputRef.current.focus();

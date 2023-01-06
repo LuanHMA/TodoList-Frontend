@@ -32,8 +32,13 @@ export const Content = () => {
   };
 
   const deleteTask = (id) => {
-    console.log(id);
-    deleteData(id);
+    const confirmDelete = window.confirm(
+      "Tem certeza que deseja excluir essa tarefa? "
+    );
+    if (confirmDelete) {
+      console.log(id);
+      deleteData(id);
+    }
   };
 
   return (
