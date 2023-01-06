@@ -11,15 +11,19 @@ export const Content = () => {
     id: "",
   });
 
+  const updateDataState = (response) => {
+    setData(response);
+  };
+
   useEffect(() => {
-    getAllData(setData);
+    getAllData(updateDataState);
   }, []);
 
   useEffect(() => {
     getAllData(setData);
   }, [data]);
 
-  const editTask = (id, description) => {
+  const updateTask = (id, description) => {
     setIsOpen(true);
     setDataToEdit({
       description: description,
@@ -44,7 +48,7 @@ export const Content = () => {
           >
             <h1>{task.description}</h1>
             <div className="ml-2 flex gap-x-3">
-              <button onClick={() => editTask(task._id, task.description)}>
+              <button onClick={() => updateTask(task._id, task.description)}>
                 <BiEdit size={22} />
               </button>
               <button onClick={() => deleteTask(task._id)}>

@@ -2,29 +2,29 @@ import axios from "axios";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const createData = (data) => {
+export const createData = (taskDescription) => {
   axios
     .post(`${apiUrl}/save`, {
-      description: data,
+      description: taskDescription,
     })
     .then((response) => {
-      console.log("your post request has been sent successfully: ", response);
+      console.log("your post request has been sent successfully: ");
     })
     .catch((error) => {
-      alert("Error to sent your post request");
+      alert("Houve algum problema ao adicionar um novo item :(");
       console.log("ERROR POST REQUEST: " + error);
     });
 };
 
-export const getAllData = (setData) => {
+export const getAllData = (updateDataState) => {
   axios
     .get(apiUrl)
     .then((response) => {
-      setData(response.data);
+      updateDataState(response.data);
     })
     .catch((error) => {
-      alert("Error requesting data");
-      console.log(error);
+      alert("Houve um problema ao recuperar os dados!");
+      console.log("ERROR GET: " + error);
     });
 };
 
@@ -40,7 +40,7 @@ export const deleteData = (_id) => {
       console.log("Task deleted with success");
     })
     .catch((error) => {
-      alert("Error to delete");
+      alert("[ERROR] Não conseguimos deletar sua tarefa");
       console.log("ERROR DELETE: " + error);
     });
 };
