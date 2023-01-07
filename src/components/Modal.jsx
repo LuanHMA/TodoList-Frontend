@@ -1,6 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { updateData } from "../api/todolistAPI";
+import { updateTodo, getAllTodos } from "../api/todolistAPI";
 
 export const Modal = ({ isOpen, setIsOpen, dataToEdit }) => {
   const [descriptonToEdit, setDescriptionToEdit] = useState("");
@@ -11,11 +11,20 @@ export const Modal = ({ isOpen, setIsOpen, dataToEdit }) => {
     setDescriptionToEdit(description);
   }, [dataToEdit]);
 
-  const handlEdit = () => {
-    const { id } = dataToEdit;
+  const validateField = (taskDescription) => {
+    if (taskDescription.length === 0) {
+      alert("Você precisa digitar alguma coisa!");
+    } else {
+      return true;
+    }
+  };
 
-    setIsOpen(false);
-    updateData(descriptonToEdit, id);
+  const handlEdit = () => {
+    const { id, setData, data } = dataToEdit;
+    if (validateField(descriptonToEdit)) {
+      setIsOpen(false);
+      updateTodo(descriptonToEdit, id, setData, data);
+    }
   };
 
   return (
